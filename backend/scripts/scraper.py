@@ -75,9 +75,19 @@ def storeInDB(db, collection_name, data):
     """
     # Get or create the MongoDB collection
     collection = db[collection_name]
+    for job_entry in data:
+        # Check if the job entry already exists in the collection
+        existing_job = collection.find_one({
+            "Post Date": job_entry["Post Date"],
+            "Bank Name": job_entry["Bank Name"],
+            "Post Name": job_entry["Post Name"],
+            "Qualification": job_entry["Qualification"],
+            "Last Date": job_entry["Last Date"]
+        })
 
-    # Insert the data into the collection
-    collection.insert_many(data)
+        # If the job entry doesn't exist, insert it into the collection
+    if existing_job is None:
+        collection.insert_one(job_entry)
 
 def processTable(table):
     """
