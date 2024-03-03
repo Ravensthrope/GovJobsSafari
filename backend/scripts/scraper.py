@@ -41,7 +41,6 @@ def scrapeData(url, db):
             job_data = processTable(table)
             storeInDB(db, category, job_data)
 
-       
     else:
         print(f"Error: Unable to fetch data from {url}. Status Code: {response.status_code}")
 
@@ -79,15 +78,15 @@ def storeInDB(db, collection_name, data):
         # Check if the job entry already exists in the collection
         existing_job = collection.find_one({
             "Post Date": job_entry["Post Date"],
-            "Bank Name": job_entry["Bank Name"],
+            "Organization": job_entry["Organization"],
             "Post Name": job_entry["Post Name"],
             "Qualification": job_entry["Qualification"],
             "Last Date": job_entry["Last Date"]
         })
 
         # If the job entry doesn't exist, insert it into the collection
-    if existing_job is None:
-        collection.insert_one(job_entry)
+        if existing_job is None:
+            collection.insert_one(job_entry)
 
 def processTable(table):
     """
@@ -111,7 +110,7 @@ def processTable(table):
         if len(cells) >= 6:
             # Extracting information based on the position of the data in the row
             post_date = cells[0].text.strip()
-            bank_name = cells[1].text.strip()
+            organization = cells[1].text.strip()
             post_name = cells[2].text.strip()
             qualification = cells[3].text.strip()
             last_date = cells[5].text.strip()
@@ -119,7 +118,7 @@ def processTable(table):
             # Store the extracted information in a dictionary or any other data structure
             job_details = {
                 "Post Date": post_date,
-                "Bank Name": bank_name,
+                "Organization": organization,
                 "Post Name": post_name,
                 "Qualification": qualification,
                 "Last Date": last_date

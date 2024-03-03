@@ -1,13 +1,19 @@
 import Express from "express";
 import dotenv from "dotenv";
+import mongoose, { mongo } from "mongoose";
+import cors from "cors";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-dotenv.config();
-console.log("Environment variables: ", process.env);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = Express();
+dotenv.config({ path: `${__dirname}/../.env` });
+mongoose.connect(process.env.MONGO_URL);
 
-app.get("/", (req, res) => {
-  res.send("Hi");
-});
+app.use(cors());
+app.use(Express.json());
 
 const port = process.env.PORT;
 app.listen(port, () => {
