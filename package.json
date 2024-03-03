@@ -2,6 +2,7 @@
   "name": "govjobssafari",
   "version": "1.0.0",
   "description": "GovJobsSafari is a full-stack web application that aggregates and displays government job opportunities. The project includes a web scraping script for collecting data from various government job websites and a MERN (MongoDB, Express.js, React.js, Node.js) stack for building the interactive frontend and managing the backend.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
