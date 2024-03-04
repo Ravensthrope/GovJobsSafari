@@ -13,5 +13,8 @@
     "MERN"
   ],
   "author": "Aafaq Hussain Irfan Sayed, Khan Mohd Kaif Abdul Majid, Khan Misba Soyab, Shaikh Mohd Rafey Rashid",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
 }
